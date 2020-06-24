@@ -1,0 +1,30 @@
+﻿<Window x:Class="PrintSpeedTestFinal.Chart"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrintSpeedTestFinal"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="Chart" Height="372.288" Width="612.885" WindowStyle="None">
+
+    <Grid>
+        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Top" Margin="10">
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+            
+        </lvc:CartesianChart>
+    </Grid>
+
+
+
+
+</Window>
+     
+    
+    
+    

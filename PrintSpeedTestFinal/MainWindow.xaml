@@ -1,0 +1,61 @@
+﻿<Window x:Class="PrintSpeedTestFinal.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrintSpeedTestFinal"
+        mc:Ignorable="d"
+        Title="PrintSpeedTest" Height="650" Width="1040" WindowStartupLocation="CenterScreen" Background="#DFE3E6" FontSize="14" ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None" Icon="icon.png">
+
+    <Grid x:Name="Grid1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.7*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="exit" Grid.Column="1" HorizontalAlignment="Right" BorderBrush="Transparent" Background="Transparent" Height="48" Width="48" Click="exit_Click">
+         
+            <Button.Template>
+                <ControlTemplate>
+
+                    <Grid>
+                        <Border x:Name="Border" 
+                                Width="{TemplateBinding ContentControl.Width}"
+                                CornerRadius="20">
+                            <Border.Background>
+                                <RadialGradientBrush RadiusX="1" RadiusY="1">
+                                    <GradientStop Color="#455F80" Offset="0"/>
+                                    <GradientStop Color="#455F80" Offset="0.5"/>
+                                </RadialGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <Image Source="exit.png" Height="50" Width="50"  HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill"/>
+                    </Grid>
+
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="Action" Content="Начать" FontSize="18" Background="#D6E9FF" Grid.Column="1" Grid.Row="2" Width="200" Height="100" VerticalAlignment="Bottom" Margin="40" Click="Action_Click" Cursor="" Focusable="False" AllowDrop="True">
+            
+        </Button>
+
+        <Label Content="Скорость:" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="75" Height="30" FontSize="15"/>
+        <Label  x:Name="Speed" Content="0 зн/мин" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="105" Height="30" FontSize="15"/>
+        <Label x:Name="Exactness" Content="0%" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="40" Height="30" FontSize="15"/>
+        <Label Content="Точность:" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="70" Height="30" FontSize="15"/>
+
+      
+        <Rectangle Grid.Row="0" Grid.ColumnSpan="2" Fill="#455F80" Panel.ZIndex="-2" />
+        <Rectangle Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Fill="#8ABEFF"  Panel.ZIndex="-1"/>
+        <Rectangle Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Fill="#D6E9FF" Panel.ZIndex="-1"/>
+        <TextBox TextWrapping="Wrap" x:Name="SourceText" FontFamily="Times New Roman" FontSize="22" Background="#D6E9FF" Grid.Column="0" Grid.Row="1" Margin="15"/>
+        <TextBox TextWrapping="Wrap" x:Name="Typing" FontFamily="Times New Roman" FontSize="20" Grid.Column="0" Grid.Row="2" Margin="15" TextChanged="Typing_TextChanged" KeyDown="Typing_KeyDown"/>
+
+    </Grid>
+
+</Window>
