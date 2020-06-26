@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrintSpeedTestFinal"
         mc:Ignorable="d"
-        Title="PrintSpeedTest" Height="650" Width="1040" WindowStartupLocation="CenterScreen" Background="#DFE3E6" FontSize="14" ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None" Icon="icon.png">
+        Title="PrintSpeedTest" Height="650" Width="1040" WindowStartupLocation="CenterScreen" Background="#DFE3E6" FontSize="14" ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None" Icon="icon.png" Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Grid x:Name="Grid1">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="3.5*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -18,7 +18,7 @@
             <RowDefinition Height="0.7*"/>
         </Grid.RowDefinitions>
         <Button x:Name="exit" Grid.Column="1" HorizontalAlignment="Right" BorderBrush="Transparent" Background="Transparent" Height="48" Width="48" Click="exit_Click">
-         
+
             <Button.Template>
                 <ControlTemplate>
 
@@ -40,16 +40,12 @@
             </Button.Template>
         </Button>
 
-        <Button x:Name="Action" Content="Начать" FontSize="18" Background="#D6E9FF" Grid.Column="1" Grid.Row="2" Width="200" Height="100" VerticalAlignment="Bottom" Margin="40" Click="Action_Click" Cursor="" Focusable="False" AllowDrop="True">
-            
-        </Button>
+        <Label Content="Скорость:" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="73,130,63,0" Height="35" FontSize="17" Width="95"/>
+        <Label  x:Name="Speed" Content="0 зн/мин" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="39,170,30,0" Height="30" FontSize="15" Width="162" HorizontalContentAlignment="Center"/>
+        <Label x:Name="Exactness" Content="0%" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Margin="46,15,43,202" Height="30" FontSize="15" Width="142" HorizontalContentAlignment="Center"/>
+        <Label Content="Точность:" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"  Margin="73,333,70,237" Height="30" FontSize="17" Grid.RowSpan="2" Width="88"/>
 
-        <Label Content="Скорость:" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="75" Height="30" FontSize="15"/>
-        <Label  x:Name="Speed" Content="0 зн/мин" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="105" Height="30" FontSize="15"/>
-        <Label x:Name="Exactness" Content="0%" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="40" Height="30" FontSize="15"/>
-        <Label Content="Точность:" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="70" Height="30" FontSize="15"/>
 
-      
         <Rectangle Grid.Row="0" Grid.ColumnSpan="2" Fill="#455F80" Panel.ZIndex="-2" />
         <Rectangle Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Fill="#8ABEFF"  Panel.ZIndex="-1"/>
         <Rectangle Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Fill="#D6E9FF" Panel.ZIndex="-1"/>

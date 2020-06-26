@@ -38,7 +38,9 @@ namespace PrintSpeedTestFinal
     public partial class MainWindow : Window
     {
         DispatcherTimer timer = new DispatcherTimer();
-       
+
+        public static bool AppGeneral { get; set; }
+
         DateTime timenow, timestart;
         delegate void Delegate();
         Delegate action;
@@ -56,7 +58,8 @@ namespace PrintSpeedTestFinal
 
             action = Do;
             textoptions = new TextOptions();
-     
+
+            AppGeneral = false;
         }
 
       
@@ -78,20 +81,16 @@ namespace PrintSpeedTestFinal
             notice.ShowDialog();
 
             SourceText.Text = textoptions.GetText();
-          
-            Action.Content = "Завершить";
+         
             timer.Start();
             timestart = DateTime.Now;
 
             action = Stop;
-            Chart c = new Chart();
-            c.Show();
         }
         public void Stop()
         {
 
             Typing.IsReadOnly = true;
-            Action.Content = "Начать";
             timer.Stop();
             action = Do;
             
@@ -99,11 +98,13 @@ namespace PrintSpeedTestFinal
             if (Typing.Text != "") 
             {
                 Tick();
-                Results notice = new Results();
-                notice.ShowDialog();
+                Results results = new Results(Assay.SpeedValues, Assay.AccuracyValues);
+                results.ShowDialog();
             }
 
             Clean();
+
+            action();
         }
 
 
@@ -120,19 +121,13 @@ namespace PrintSpeedTestFinal
             Assay.Characters = Typing.Text.Length;
             Assay.Compute(minutes);
 
-            Speed.Content = Assay.PrintSpeed;
+            Assay.WritingValuesForTheChart();
+
+            Speed.Content = Assay.PrintSpeed; // обновление в окне 
             Exactness.Content = Assay.Accuracy;
         }
         
      
-
-
-        private void Action_Click(object sender, RoutedEventArgs e)
-        {
-             action();
-        }
-
-
 
         private void Typing_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -168,6 +163,23 @@ namespace PrintSpeedTestFinal
                 action();
         }
 
+       
+
+   
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            action();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (Results.chartwindow != null)
+            {
+                AppGeneral = true;
+                Results.chartwindow.Close();
+            }
+        }
+
         public void Clean()
         {
             Typing.Text = null;
@@ -179,8 +191,8 @@ namespace PrintSpeedTestFinal
             Assay.Characters = 0;
             Assay.mistakes = 0;
             Assay.PrintSpeed = null;
-
+            Assay.AccuracyValues = new List<double>();
+            Assay.SpeedValues = new List<double>();
         }
-
     }
 }

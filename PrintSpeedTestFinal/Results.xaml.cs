@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,8 @@ namespace PrintSpeedTestFinal
     /// </summary>
     public partial class Results : Window
     {
-        public Results()
+        public static Chart chartwindow;
+        public Results(ICollection<double> collection1, ICollection<double> collection2)
         {
             InitializeComponent();
             Grid1.MouseLeftButtonDown += new MouseButtonEventHandler(layoutRoot_MouseLeftButtonDown);
@@ -27,7 +29,7 @@ namespace PrintSpeedTestFinal
             Accuracy.Content = Assay.Accuracy;
             Rating.Content = Assay.Rating();
 
-
+            chartwindow = new Chart(collection1,collection2);
 
         }
 
@@ -38,6 +40,16 @@ namespace PrintSpeedTestFinal
         private void layoutRoot_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) //перетаскивание формы 
         {
             this.DragMove();
+        }
+
+        private void chart_Click(object sender, RoutedEventArgs e)
+        {
+            chartwindow.ShowDialog();
+        }
+
+        private void Window_Closing(object sender,CancelEventArgs e)
+        {
+            chartwindow.Close();
         }
     }
 }

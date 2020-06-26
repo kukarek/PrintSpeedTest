@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrintSpeedTestFinal"
         mc:Ignorable="d"
-        Title="Results"  Height="200" Width="300" ResizeMode="NoResize" FontSize="18" WindowStartupLocation="CenterScreen" Background="#455F80" WindowStyle="None">
+        Title="Results"  Height="200" Width="300" ResizeMode="NoResize" FontSize="18" WindowStartupLocation="CenterScreen" Background="#455F80" WindowStyle="None" Closing="Window_Closing">
     <Grid x:Name="Grid1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -19,13 +19,35 @@
         </Grid.RowDefinitions>
 
         <Label x:Name="Rating" Grid.Row="0" Grid.ColumnSpan="2" Content="Неплохо!" Foreground="White" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" FontSize="28"/>
-        <Button Grid.Row="3" Grid.ColumnSpan="2" Margin="50,10" Content="Ок" Background="White" Foreground="#455F80" Click="Button_Click"/>
+        <Button Grid.Row="3" Grid.ColumnSpan="2" Margin="35,10,84,10" Content="Ок" Background="White" Foreground="#455F80" Click="Button_Click"/>
         <Image Source="speedometer.png" Grid.Row="1" Grid.Column="0" Height="40" Width="40" HorizontalAlignment="Right"/>
         <Image  Source="target.png" Grid.Row="2" Grid.Column="0" Height="40" Width="40" HorizontalAlignment="Right"/>
         <Label x:Name="Speed" Grid.Row="1" Grid.Column="1" Width="150" HorizontalAlignment="Left"  Content="145 зн/мин" Foreground="White" Margin="10,0,0,0"/>
         <Label x:Name="Accuracy" Grid.Row="2" Grid.Column="1" Width="150" HorizontalAlignment="Left"  Content="94 %" Foreground="White" Margin="10,0,0,0"/>
 
-   
+
+        <Button x:Name="chart" Grid.Column="1" HorizontalAlignment="Right" BorderBrush="Transparent" Background="Transparent" Width="48" Margin="0,10,31,10" Click="chart_Click" Grid.Row="3">
+
+            <Button.Template>
+                <ControlTemplate>
+
+                    <Grid>
+                        <Border x:Name="Border" 
+                                Width="{TemplateBinding ContentControl.Width}"
+                                CornerRadius="20">
+                            <Border.Background>
+                                <RadialGradientBrush RadiusX="1" RadiusY="1">
+                                    <GradientStop Color="#455F80" Offset="0"/>
+                                    <GradientStop Color="#455F80" Offset="0.5"/>
+                                </RadialGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <Image Source="chart1.png" Height="40" Width="40"  HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill"/>
+                    </Grid>
+
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
     </Grid>
 </Window>
