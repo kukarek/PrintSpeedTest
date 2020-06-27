@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrintSpeedTestFinal"
         mc:Ignorable="d"
-        Title="PrintSpeedTest" Height="650" Width="1040" WindowStartupLocation="CenterScreen" Background="#DFE3E6" FontSize="14" ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None" Icon="icon.png" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="PrintSpeedTest" Height="650" Width="1040" WindowStartupLocation="CenterScreen" Background="#DFE3E6"
+        FontSize="14" ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None" Icon="icon.png" Loaded="Window_Loaded">
 
     <Grid x:Name="Grid1">
         <Grid.ColumnDefinitions>

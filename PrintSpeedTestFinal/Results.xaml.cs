@@ -20,7 +20,20 @@ namespace PrintSpeedTestFinal
     /// </summary>
     public partial class Results : Window
     {
-        public static Chart chartwindow;
+        /// <summary>
+        /// Значения для графика.
+        /// </summary>
+        public ICollection<double> collection_1 { get; set; }
+
+        /// <summary>
+        /// Значения для графика.
+        /// </summary>
+        public ICollection<double> collection_2 { get; set; }
+
+        /// <summary>
+        /// Окно графика.
+        /// </summary>
+        public Chart chartwindow;
         public Results(ICollection<double> collection1, ICollection<double> collection2)
         {
             InitializeComponent();
@@ -29,27 +42,39 @@ namespace PrintSpeedTestFinal
             Accuracy.Content = Assay.Accuracy;
             Rating.Content = Assay.Rating();
 
-            chartwindow = new Chart(collection1,collection2);
-
+            collection_1 = collection1;
+            collection_2 = collection2;
         }
 
+        /// <summary>
+        /// Закрытие окна.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
         }
+
+        /// <summary>
+        /// Перетаскиване формы мышкой.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void layoutRoot_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) //перетаскивание формы 
         {
             this.DragMove();
         }
 
+        /// <summary>
+        /// Вызов окна графика.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void chart_Click(object sender, RoutedEventArgs e)
         {
+            chartwindow = new Chart(collection_1, collection_2);
             chartwindow.ShowDialog();
-        }
-
-        private void Window_Closing(object sender,CancelEventArgs e)
-        {
-            chartwindow.Close();
         }
     }
 }

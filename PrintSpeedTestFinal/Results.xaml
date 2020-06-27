@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrintSpeedTestFinal"
         mc:Ignorable="d"
-        Title="Results"  Height="200" Width="300" ResizeMode="NoResize" FontSize="18" WindowStartupLocation="CenterScreen" Background="#455F80" WindowStyle="None" Closing="Window_Closing">
+        Title="Results"  Height="200" Width="300" ResizeMode="NoResize" FontSize="18" WindowStartupLocation="CenterScreen" 
+        Background="#455F80" WindowStyle="None">
     <Grid x:Name="Grid1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

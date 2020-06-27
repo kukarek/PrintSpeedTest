@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,62 +22,77 @@ namespace PrintSpeedTestFinal
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
-    //
-    //
-    // Нужно: 
-    // 1) Подсчет скорости печати и ошибок(исправленных тоже) в реальном времени(точность в %) (сделано)
-    // 2) Подсчет скорости печати и ошибок после остановки (сделано)
-    // 3) Подсвечивание ошибок красным (сделано)
-    // 4) По enter старт/завершения печати(сделано)
-    // 5) Начало/конец при начале/конце печати в текстбокс (сделано)
-
-
-    //  осталось добавить текст в папку
-
-
+    /// </summary>\
     public partial class MainWindow : Window
     {
-        DispatcherTimer timer = new DispatcherTimer();
+        /// <summary>
+        /// Таймер.
+        /// </summary>
+        DispatcherTimer timer { get; set; }
 
-        public static bool AppGeneral { get; set; }
+        /// <summary>
+        /// Текущее время.
+        /// </summary>
+        DateTime timenow { get; set; }
 
-        DateTime timenow, timestart;
-        delegate void Delegate();
-        Delegate action;
-        TextOptions textoptions;
+        /// <summary>
+        /// Время старта.
+        /// </summary>
+        DateTime timestart { get; set; }
+
+        /// <summary>
+        /// Исходный текст.
+        /// </summary>
+        TextOptions textoptions { get; set; }
+
+        /// <summary>
+        /// Начинает или завершает выполнение основной логики.
+        /// </summary>
+        Action action { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
             Grid1.MouseLeftButtonDown += new MouseButtonEventHandler(layoutRoot_MouseLeftButtonDown);
-      
+         
+            timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timerTick);
             timer.Interval = new TimeSpan(0, 0, 1);
             SourceText.IsHitTestVisible = false;
             Typing.IsReadOnly = true;
 
-            action = Do;
+            action = Start;
             textoptions = new TextOptions();
-
-            AppGeneral = false;
         }
 
-      
+        /// <summary>
+        /// Выход из приложения.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Перетаскивание формы за края.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void layoutRoot_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) //перетаскивание формы 
         {
             this.DragMove();
         }
 
-        public void Do()
+        /// <summary>
+        /// Старт выполнения вычислений.
+        /// </summary>
+        public void Start()
         {
             Typing.IsReadOnly = false;
             Typing.Focus(); 
+
             DialogWindow notice = new DialogWindow();
             notice.ShowDialog();
 
@@ -87,12 +103,16 @@ namespace PrintSpeedTestFinal
 
             action = Stop;
         }
+
+        /// <summary>
+        /// Остановка вычислений.
+        /// </summary>
         public void Stop()
         {
 
             Typing.IsReadOnly = true;
             timer.Stop();
-            action = Do;
+            action = Start;
             
 
             if (Typing.Text != "") 
@@ -107,12 +127,19 @@ namespace PrintSpeedTestFinal
             action();
         }
 
-
+        /// <summary>
+        /// Работа таймера.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void timerTick(object sender,EventArgs e)
         {
             Tick();
         }
 
+        /// <summary>
+        /// Выполнение вычислений.
+        /// </summary>
         public void Tick()
         {
             timenow = DateTime.Now;
@@ -128,7 +155,11 @@ namespace PrintSpeedTestFinal
         }
         
      
-
+        /// <summary>
+        /// Проверка правильности печати.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Typing_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -157,29 +188,27 @@ namespace PrintSpeedTestFinal
                 Typing.Background = Brushes.White;
         }
 
+        /// <summary>
+        /// Определение горячей клавиши.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Typing_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
+            {
                 action();
+            }
         }
 
-       
-
-   
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             action();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (Results.chartwindow != null)
-            {
-                AppGeneral = true;
-                Results.chartwindow.Close();
-            }
-        }
-
+        /// <summary>
+        /// Очистка всех полей и объктов.
+        /// </summary>
         public void Clean()
         {
             Typing.Text = null;
@@ -188,9 +217,9 @@ namespace PrintSpeedTestFinal
             Speed.Content = "0 зн/мин";
 
             Assay.Accuracy = null;
+            Assay.PrintSpeed = null;
             Assay.Characters = 0;
             Assay.mistakes = 0;
-            Assay.PrintSpeed = null;
             Assay.AccuracyValues = new List<double>();
             Assay.SpeedValues = new List<double>();
         }

@@ -6,7 +6,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:PrintSpeedTestFinal"
         mc:Ignorable="d"
-        Title="Chart" Height="450" Width="800" Closing="Window_Closing">
+        Title="Chart" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="784*"/>
